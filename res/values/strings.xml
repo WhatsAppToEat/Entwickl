@@ -4,5 +4,9 @@
     <string name="app_name">WhatsAppToEat</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="Add">Add</string>
+    <string name="Adchecken">Ad checken</string>
+    <string name="Exit">Exit</string>
+    <string name="ADatum">A.Datum</string>
 
 </resources>

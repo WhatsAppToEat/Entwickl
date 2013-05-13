@@ -44,12 +44,10 @@ public class MainActivity extends Activity {
     	tv_mass.setText(temp.masseinheit);
     	
     	tr_name.addView(tv_name);
-    	tr_name.addView(tv_menge);
-    	tr_name.addView(tv_mass);
     	tr_menge.addView(tv_menge);
     	tr_mass.addView(tv_mass);
     	
-    	TableLayout tl = (TableLayout)findViewById(R.id.tableLayout1);
+    	TableLayout tl_name = (TableLayout)findViewById(R.id.tableLayout1);
     	TableLayout tl_menge = (TableLayout)findViewById(R.id.tableLayout2);
     	TableLayout tl_mass = (TableLayout)findViewById(R.id.tableLayout3);
 

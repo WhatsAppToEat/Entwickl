@@ -74,16 +74,35 @@
         android:ems="10"
         android:text="Maßeinheit"
         android:textSize="13sp" />
-   
+
     <TableLayout
         android:id="@+id/tableLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button1"
         android:layout_alignLeft="@+id/editText1"
-        android:layout_alignRight="@+id/Button01"
-        android:layout_below="@+id/editText1" >
+        android:layout_below="@+id/editText1"
+        android:layout_toLeftOf="@+id/button2" >
     </TableLayout>
-    
+
+    <TableLayout
+        android:id="@+id/tableLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tableLayout1"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignTop="@+id/tableLayout1" >
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/tableLayout3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tableLayout2"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_alignRight="@+id/editText3"
+        android:layout_alignTop="@+id/tableLayout2" >
+    </TableLayout>
 
 </RelativeLayout>

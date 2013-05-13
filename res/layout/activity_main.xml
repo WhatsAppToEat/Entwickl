@@ -15,6 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="-5dp"
+        android:onClick="Add_Click"
         android:text="@string/Add"
         android:width="95dp" />
 

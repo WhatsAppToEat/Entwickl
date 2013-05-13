@@ -31,8 +31,8 @@ public class MainActivity extends Activity {
     	temp.masseinheit = "Stück";
     	
     	TableRow tr_name = new TableRow(this);
-    	//TableRow tr_menge = new TableRow(this);
-    	//TableRow tr_mass = new TableRow(this);
+    	TableRow tr_menge = new TableRow(this);
+    	TableRow tr_mass = new TableRow(this);
     	
     	TextView tv_name = new TextView(this);
     	tv_name.setText(temp.name);
@@ -46,18 +46,16 @@ public class MainActivity extends Activity {
     	tr_name.addView(tv_name);
     	tr_name.addView(tv_menge);
     	tr_name.addView(tv_mass);
-    	//tr_menge.addView(tv_menge);
-    	//tr_mass.addView(tv_mass);
+    	tr_menge.addView(tv_menge);
+    	tr_mass.addView(tv_mass);
     	
     	TableLayout tl = (TableLayout)findViewById(R.id.tableLayout1);
-    	//TableLayout tl_menge = (TableLayout)findViewById(R.id.tableLayout2);
-    	//TableLayout tl_mass = (TableLayout)findViewById(R.id.tableLayout3);
-    	
-    	tl.addView(tr_name);
-    	
-    	//tl_name.addView(tr_name);
-    	//tl_menge.addView(tr_menge);
-    	//tl_mass.addView(tr_mass);
+    	TableLayout tl_menge = (TableLayout)findViewById(R.id.tableLayout2);
+    	TableLayout tl_mass = (TableLayout)findViewById(R.id.tableLayout3);
+
+    	tl_name.addView(tr_name);
+    	tl_menge.addView(tr_menge);
+    	tl_mass.addView(tr_mass);
     	
     	
     }

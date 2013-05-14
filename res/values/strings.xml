@@ -8,5 +8,8 @@
     <string name="Adchecken">Ad checken</string>
     <string name="Exit">Exit</string>
     <string name="ADatum">A.Datum</string>
+    <string name="Name">Name</string>
+    <string name="Menge">Menge</string>
+    <string name="Masseinheit">Maßeinheit</string>
 
 </resources>

@@ -19,6 +19,9 @@ public class MainActivity extends Activity {
         AddNewFoodToTable("Fleisch", "1", "KGramm");
         AddNewFoodToTable("Milch", "1.5", "Liter");
         AddNewFoodToTable("Ei", "6", "Stück");
+        AddNewFoodToTable("Sahne", "100", "MLiter");
+        AddNewFoodToTable("Zitrone", "2", "Stück");
+        AddNewFoodToTable("Joghurt", "300", "MLiter");
     }
 
 

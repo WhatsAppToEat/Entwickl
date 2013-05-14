@@ -14,6 +14,11 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AddNewFoodToTable("Apfel", "3", "Stück");
+        AddNewFoodToTable("Mehl", "500", "Gramm");
+        AddNewFoodToTable("Fleisch", "1", "KGramm");
+        AddNewFoodToTable("Milch", "1.5", "Liter");
+        AddNewFoodToTable("Eier", "6", "Stück");
     }
 
 
@@ -24,39 +29,40 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void Add_Click(View v) {
-    	Food temp = new Food();
-    	temp.name = "Apfel";
-    	temp.menge = "3";
-    	temp.masseinheit = "Stück";
-    	
-    	TableRow tr_name = new TableRow(this);
-    	TableRow tr_menge = new TableRow(this);
-    	TableRow tr_mass = new TableRow(this);
-    	
-    	TextView tv_name = new TextView(this);
-    	tv_name.setText(temp.name);
-    	
-    	TextView tv_menge = new TextView(this);
-    	tv_menge.setText(temp.menge);
-    	
-    	TextView tv_mass = new TextView(this);
-    	tv_mass.setText(temp.masseinheit);
-    	
-    	tr_name.addView(tv_name);
-    	tr_menge.addView(tv_menge);
-    	tr_mass.addView(tv_mass);
-    	
-    	TableLayout tl_name = (TableLayout)findViewById(R.id.tableLayout1);
-    	TableLayout tl_menge = (TableLayout)findViewById(R.id.tableLayout2);
-    	TableLayout tl_mass = (TableLayout)findViewById(R.id.tableLayout3);
-
-    	tl_name.addView(tr_name);
-    	tl_menge.addView(tr_menge);
-    	tl_mass.addView(tr_mass);
-    	
+    public void Add_Click(View v) { 	
     	
     }
+
     
+    public void AddNewFoodToTable(String name, String menge, String masseinheit) {
+    	
+    	TextView tv_name = new TextView(this);
+    	tv_name.setText(name);
+    	
+    	TextView tv_menge = new TextView(this);
+    	tv_menge.setText(menge);
+    	
+    	TextView tv_masseinheit = new TextView(this);
+    	tv_masseinheit.setText(masseinheit);
+    	
+    	TableRow tr_name = new TableRow(this);
+    	tr_name.addView(tv_name);
+    	
+    	TableRow tr_menge = new TableRow(this);
+    	tr_menge.addView(tv_menge);
+    	
+    	TableRow tr_masseinheit = new TableRow(this);
+    	tr_masseinheit.addView(tv_masseinheit);
+    	
+    	TableLayout tl_name = (TableLayout)findViewById(R.id.tableLayout1);
+    	tl_name.addView(tr_name);
+    	
+    	TableLayout tl_menge = (TableLayout)findViewById(R.id.tableLayout2);
+    	tl_menge.addView(tr_menge);
+    	
+    	TableLayout tl_mass = (TableLayout)findViewById(R.id.tableLayout3);
+    	tl_mass.addView(tr_masseinheit);
+    	
+    }
     
 }

@@ -1,5 +1,7 @@
 package com.example.whatsapptoeat;
 
+import data.DatabaseHandler;
+import data.Food;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -22,6 +24,16 @@ public class MainActivity extends Activity {
         AddNewFoodToTable("Sahne", "100", "MLiter");
         AddNewFoodToTable("Zitrone", "2", "Stück");
         AddNewFoodToTable("Joghurt", "300", "MLiter");
+        
+        //DatabaseHandler db = new DatabaseHandler(this);
+        //db.addFood(new Food("Apfel", 3, "Stück", "31.12.2015"));
+        //db.addFood(new Food("Milch", 1.5, "Liter", "14.08.2013"));
+        
+        //Food temp = new Food();
+        //temp = db.getFood("Milch");
+        
+        //AddNewFoodToTable(temp.getName(), String.valueOf(temp.getMenge()), temp.getMasseinheit());
+        
     }
 
 
@@ -48,6 +60,8 @@ public class MainActivity extends Activity {
     	TextView tv_masseinheit = new TextView(this);
     	tv_masseinheit.setText(masseinheit);
     	
+    	////
+    	
     	TableRow tr_name = new TableRow(this);
     	tr_name.addView(tv_name);
     	
@@ -56,6 +70,8 @@ public class MainActivity extends Activity {
     	
     	TableRow tr_masseinheit = new TableRow(this);
     	tr_masseinheit.addView(tv_masseinheit);
+    	
+    	////
     	
     	TableLayout tl_name = (TableLayout)findViewById(R.id.tableLayout1);
     	tl_name.addView(tr_name);

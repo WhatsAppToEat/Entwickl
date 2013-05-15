@@ -11,5 +11,6 @@
     <string name="Name">Name</string>
     <string name="Menge">Menge</string>
     <string name="Masseinheit">Maßeinheit</string>
+    <string name="title_activity_add_food">AddFood</string>
 
 </resources>

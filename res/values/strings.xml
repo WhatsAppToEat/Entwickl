@@ -12,5 +12,18 @@
     <string name="Menge">Menge</string>
     <string name="Masseinheit">Maßeinheit</string>
     <string name="title_activity_add_food">AddFood</string>
+    <string name="Name_DP">Name:</string>
+    <string name="Menge_DP">Menge:</string>
+    <string name="Masseinheit_DP">Masseinheit:</string>
+    <string name="Save">Save</string>
+    
+    <string name="masseinheit_waehlen">Masseinheit wählen</string>
+    <string-array  name="masseinheiten">
+        <item>Stück.</item>
+        <item>Gramm</item>
+        <item>KGramm</item>
+        <item>Liter</item>
+        <item>MLiter</item>
+    </string-array>
 
 </resources>

@@ -47,7 +47,24 @@ public class MainActivity extends Activity {
     
     public void Add_Click(View v) { 	
     	Intent myIntent = new Intent(this, AddFood.class);
-    	MainActivity.this.startActivity(myIntent);
+    	startActivityForResult(myIntent, 1);
+    	//MainActivity.this.startActivity(myIntent);
+    }
+    
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    	  if (requestCode == 1) {
+
+    	     if(resultCode == RESULT_OK){      
+    	         String name = data.getStringExtra("name");
+    	         String menge = data.getStringExtra("menge");
+    	         String masseinheit = data.getStringExtra("masseinheit");
+    	         AddNewFoodToTable(name, menge, masseinheit);
+    	     }
+    	     if (resultCode == RESULT_CANCELED) {    
+    	         //Write your code if there's no result
+    	     }
+    	  }
     }
 
     

@@ -19,7 +19,7 @@
     
     <string name="masseinheit_waehlen">Masseinheit wählen</string>
     <string-array  name="masseinheiten">
-        <item>Stück.</item>
+        <item>Stück</item>
         <item>Gramm</item>
         <item>KGramm</item>
         <item>Liter</item>

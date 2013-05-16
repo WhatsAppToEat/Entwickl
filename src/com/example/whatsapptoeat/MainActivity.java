@@ -36,10 +36,13 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void Add_Click(View v) { 	
+    public void Click_Add(View v) { 	
     	Intent myIntent = new Intent(this, AddFood.class);
     	startActivityForResult(myIntent, 1);
-    	//MainActivity.this.startActivity(myIntent);
+    }
+    
+    public void Click_Exit(View v) {
+    finish();	
     }
     
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

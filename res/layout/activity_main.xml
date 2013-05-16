@@ -15,7 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="-5dp"
-        android:onClick="Add_Click"
+        android:onClick="Click_Add"
         android:text="@string/Add"
         android:width="95dp" />
 
@@ -27,6 +27,7 @@
         android:layout_alignBottom="@+id/button1"
         android:layout_alignParentRight="true"
         android:layout_marginRight="0dp"
+        android:onClick="Click_Exit"
         android:text="@string/Exit"
         android:width="95dp" />
 

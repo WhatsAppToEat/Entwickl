@@ -26,15 +26,6 @@ public class MainActivity extends Activity {
         AddNewFoodToTable("Zitrone", "2", "Stück");
         AddNewFoodToTable("Joghurt", "300", "MLiter");
         
-        //DatabaseHandler db = new DatabaseHandler(this);
-        //db.addFood(new Food("Apfel", 3, "Stück", "31.12.2015"));
-        //db.addFood(new Food("Milch", 1.5, "Liter", "14.08.2013"));
-        
-        //Food temp = new Food();
-        //temp = db.getFood("Milch");
-        
-        //AddNewFoodToTable(temp.getName(), String.valueOf(temp.getMenge()), temp.getMasseinheit());
-        
     }
 
 

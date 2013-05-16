@@ -3,6 +3,8 @@ package com.example.whatsapptoeat;
 import data.Food;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -36,15 +38,34 @@ public class AddFood extends Activity {
 		EditText et_menge = (EditText)findViewById(R.id.editText2);
 		Spinner sp_mass = (Spinner)findViewById(R.id.spinner1);
 		
-		// HALLO
+		if (et_name.getText().length() <= 0 || et_menge.getText().length() <= 0) {
+			
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("Fehlende Information");
+			builder.setMessage("Bitte füllen Sie das Formular komplett aus, bevor Sie auf \"Save\" klicken!");
+			builder.setNegativeButton("OK",new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int id) {
+	                dialog.cancel();
+	            }
+	        });
+
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
+		else {		
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra("name", et_name.getText().toString());
+			returnIntent.putExtra("menge", et_menge.getText().toString());
+			returnIntent.putExtra("masseinheit", sp_mass.getSelectedItem().toString());
+			setResult(RESULT_OK, returnIntent);
+			finish();
+		}
 		
-		Intent returnIntent = new Intent();
-		returnIntent.putExtra("name", et_name.getText().toString());
-		returnIntent.putExtra("menge", et_menge.getText().toString());
-		returnIntent.putExtra("masseinheit", sp_mass.getSelectedItem().toString());
-		setResult(RESULT_OK, returnIntent);
+	}
+	
+	
+	public void Click_Exit(View v){
 		finish();
-		
 	}
 
 }

@@ -36,6 +36,7 @@ public class AddFood extends Activity {
 		EditText et_menge = (EditText)findViewById(R.id.editText2);
 		Spinner sp_mass = (Spinner)findViewById(R.id.spinner1);
 		
+		// HALLO
 		
 		Intent returnIntent = new Intent();
 		returnIntent.putExtra("name", et_name.getText().toString());

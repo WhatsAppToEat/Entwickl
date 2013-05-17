@@ -22,8 +22,6 @@ public class AddFood extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_food);
 		
-		//MAX STINKT
-		
 	}
 
 	@Override

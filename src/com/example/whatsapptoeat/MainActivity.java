@@ -25,7 +25,7 @@ import android.content.Intent;
 
 public class MainActivity extends Activity {
 
-	FoodsDataSource datasource;
+	FoodsDataSource datasource = new FoodsDataSource(this);
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +117,6 @@ public class MainActivity extends Activity {
     	TableLayout tl_mass = (TableLayout)findViewById(R.id.tableLayout3);
     	
     	tl_mass.removeAllViews();
-        datasource = new FoodsDataSource(this);
         datasource.open();
         List<Food> getFood;
         getFood = datasource.getAllFood();

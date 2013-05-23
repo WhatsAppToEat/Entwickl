@@ -1,7 +1,5 @@
 package com.example.whatsapptoeat;
 
-import data.DatabaseHandler;
-import data.Food;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,14 +8,30 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import de.wate.android.sqlite.first.FoodsDataSource;
+import de.wate.android.sqlite.first.Food;
+import java.util.ArrayList;
+import java.util.List;
+import android.widget.ArrayAdapter;
+import java.util.Random;
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.app.Activity;
+import android.content.Intent;
 
 public class MainActivity extends Activity {
 
+	FoodsDataSource datasource;
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AddNewFoodToTable("Apfel", "3", "Stück");
+        /*AddNewFoodToTable("Apfel", "3", "Stück");
         AddNewFoodToTable("Mehl", "500", "Gramm");
         AddNewFoodToTable("Fleisch", "1", "KGramm");
         AddNewFoodToTable("Milch", "1.5", "Liter");
@@ -25,7 +39,22 @@ public class MainActivity extends Activity {
         AddNewFoodToTable("Sahne", "100", "MLiter");
         AddNewFoodToTable("Zitrone", "2", "Stück");
         AddNewFoodToTable("Joghurt", "300", "MLiter");
+        */
+        datasource = new FoodsDataSource(this);
+        datasource.open();
         
+        //String[] test = new String[]{"Milch", "3", "liter", "5.5.2013"};
+        
+        //datasource.createFood(test);
+        
+        List<Food> getFood;
+        getFood = datasource.getAllFood();
+        
+        for(int i = 0; i < getFood.size(); i++)
+        {
+        	AddNewFoodToTable(getFood.get(i).getName(), String.valueOf(getFood.get(i).getMenge()), getFood.get(i).getMasseinheit());
+        }
+
     }
 
 
@@ -50,10 +79,17 @@ public class MainActivity extends Activity {
     	  if (requestCode == 1) {
 
     	     if(resultCode == RESULT_OK){      
-    	         String name = data.getStringExtra("name");
-    	         String menge = data.getStringExtra("menge");
-    	         String masseinheit = data.getStringExtra("masseinheit");
-    	         AddNewFoodToTable(name, menge, masseinheit);
+    	         //String name = data.getStringExtra("name");
+    	         //String menge = data.getStringExtra("menge");
+    	         //String masseinheit = data.getStringExtra("masseinheit");
+    	         //AddNewFoodToTable(name, menge, masseinheit);
+    	    	 String[] values = new String[4];
+    	    	 values[0] = data.getStringExtra("name");
+    	    	 values[1] = data.getStringExtra("menge");
+    	    	 values[2] = data.getStringExtra("masseinheit");
+    	    	 values[3] = "5.5.2013";
+    	    	 
+    	    	 datasource.createFood(values);
     	     }
     	     if (resultCode == RESULT_CANCELED) {    
     	         //Write your code if there's no result

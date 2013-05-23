@@ -1,6 +1,8 @@
 package com.example.whatsapptoeat;
 
-import data.Food;
+import de.wate.android.sqlite.first.FoodsDataSource;
+import de.wate.android.sqlite.first.Food;
+import android.R.string;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,11 +19,12 @@ import android.widget.TextView;
 
 public class AddFood extends Activity {
 
+	FoodsDataSource datasource;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_food);
-		
 	}
 
 	@Override
@@ -32,6 +35,8 @@ public class AddFood extends Activity {
 	}
 	
 	public void Click_Save(View v) {
+		
+		string[] data = new string[4];
 		
 		EditText et_name = (EditText)findViewById(R.id.editText1);
 		EditText et_menge = (EditText)findViewById(R.id.editText2);

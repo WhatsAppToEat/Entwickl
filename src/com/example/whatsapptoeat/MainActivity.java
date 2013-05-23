@@ -31,30 +31,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*AddNewFoodToTable("Apfel", "3", "Stück");
-        AddNewFoodToTable("Mehl", "500", "Gramm");
-        AddNewFoodToTable("Fleisch", "1", "KGramm");
-        AddNewFoodToTable("Milch", "1.5", "Liter");
-        AddNewFoodToTable("Ei", "6", "Stück");
-        AddNewFoodToTable("Sahne", "100", "MLiter");
-        AddNewFoodToTable("Zitrone", "2", "Stück");
-        AddNewFoodToTable("Joghurt", "300", "MLiter");
-        */
-        datasource = new FoodsDataSource(this);
-        datasource.open();
-        
-        //String[] test = new String[]{"Milch", "3", "liter", "5.5.2013"};
-        
-        //datasource.createFood(test);
-        
-        List<Food> getFood;
-        getFood = datasource.getAllFood();
-        
-        for(int i = 0; i < getFood.size(); i++)
-        {
-        	AddNewFoodToTable(getFood.get(i).getName(), String.valueOf(getFood.get(i).getMenge()), getFood.get(i).getMasseinheit());
-        }
-
+        FillTableWithDatabaseValues();
     }
 
 
@@ -79,27 +56,26 @@ public class MainActivity extends Activity {
     	  if (requestCode == 1) {
 
     	     if(resultCode == RESULT_OK){      
-    	         //String name = data.getStringExtra("name");
-    	         //String menge = data.getStringExtra("menge");
-    	         //String masseinheit = data.getStringExtra("masseinheit");
-    	         //AddNewFoodToTable(name, menge, masseinheit);
+    	         String name = data.getStringExtra("name");
+    	         String menge = data.getStringExtra("menge");
+    	         String masseinheit = data.getStringExtra("masseinheit");
+    	         AddNewFoodToTable(name, menge, masseinheit);
     	    	 String[] values = new String[4];
     	    	 values[0] = data.getStringExtra("name");
     	    	 values[1] = data.getStringExtra("menge");
     	    	 values[2] = data.getStringExtra("masseinheit");
-    	    	 values[3] = "5.5.2013";
-    	    	 
+    	    	 values[3] = "5.5.2013";   	    	 
     	    	 datasource.createFood(values);
+    	    	 FillTableWithDatabaseValues();
     	     }
     	     if (resultCode == RESULT_CANCELED) {    
     	         //Write your code if there's no result
     	     }
     	  }
-    }
+    }    
 
-    
     public void AddNewFoodToTable(String name, String menge, String masseinheit) {
-    	
+	
     	TextView tv_name = new TextView(this);
     	tv_name.setText(name);
     	
@@ -131,6 +107,24 @@ public class MainActivity extends Activity {
     	TableLayout tl_mass = (TableLayout)findViewById(R.id.tableLayout3);
     	tl_mass.addView(tr_masseinheit);
     	
+    }
+    
+    public void FillTableWithDatabaseValues() {
+    	TableLayout tl_name = (TableLayout)findViewById(R.id.tableLayout1);
+    	tl_name.removeAllViews();
+    	TableLayout tl_menge = (TableLayout)findViewById(R.id.tableLayout2);
+    	tl_menge.removeAllViews();
+    	TableLayout tl_mass = (TableLayout)findViewById(R.id.tableLayout3);
+    	
+    	tl_mass.removeAllViews();
+        datasource = new FoodsDataSource(this);
+        datasource.open();
+        List<Food> getFood;
+        getFood = datasource.getAllFood();
+        for(int i = 0; i < getFood.size(); i++)
+        {
+        	AddNewFoodToTable(getFood.get(i).getName(), String.valueOf(getFood.get(i).getMenge()), getFood.get(i).getMasseinheit());
+        }
     }
     
 }

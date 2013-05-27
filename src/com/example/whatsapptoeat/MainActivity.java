@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
 
     	  if (requestCode == 1) {
 
-    	     if(resultCode == RESULT_OK){      
+    	     if(resultCode == 1){      
     	         String name = data.getStringExtra("name");
     	         String menge = data.getStringExtra("menge");
     	         String masseinheit = data.getStringExtra("masseinheit");
@@ -69,8 +69,11 @@ public class MainActivity extends Activity {
     	    	 datasource.createFood(values);
     	    	 FillTableWithDatabaseValues();
     	     }
-    	     if (resultCode == RESULT_CANCELED) {    
+    	     if (resultCode == 2) {    
     	    	 DeleteFoodFromDatabase(data.getStringExtra("name").toString());
+    	     }
+    	     
+    	     if (resultCode == 3) {
     	     }
     	  }
     }    
@@ -149,6 +152,8 @@ public class MainActivity extends Activity {
 
     public void Click_FoodInTable(View v) {
     	Intent myIntent = new Intent(this, AddFood.class);
+    	String name = ((TextView)v).getText().toString();
+    	myIntent.putExtra("name", name);
     	startActivityForResult(myIntent, 1);
     }
 }

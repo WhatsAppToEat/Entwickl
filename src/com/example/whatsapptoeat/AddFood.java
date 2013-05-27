@@ -25,6 +25,11 @@ public class AddFood extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_food);
+		Intent myIntent = this.getIntent();
+		String name = myIntent.getStringExtra("name");
+		EditText et_name = (EditText)findViewById(R.id.editText1);
+		et_name.setText(name);
+		
 	}
 
 	@Override
@@ -60,7 +65,7 @@ public class AddFood extends Activity {
 			returnIntent.putExtra("name", et_name.getText().toString());
 			returnIntent.putExtra("menge", et_menge.getText().toString());
 			returnIntent.putExtra("masseinheit", sp_mass.getSelectedItem().toString());
-			setResult(RESULT_OK, returnIntent);
+			setResult(1, returnIntent);
 			finish();
 		}
 		
@@ -68,6 +73,8 @@ public class AddFood extends Activity {
 	
 	
 	public void Click_Exit(View v){
+		Intent returnIntent = new Intent();
+		setResult(3, returnIntent);
 		finish();
 	}
 	
@@ -88,7 +95,7 @@ public class AddFood extends Activity {
 		else {
 			Intent returnIntent = new Intent();
 			returnIntent.putExtra("name", et_name.getText().toString());
-			setResult(RESULT_CANCELED, returnIntent);
+			setResult(2, returnIntent);
 			finish();
 		}
 		

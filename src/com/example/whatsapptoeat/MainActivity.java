@@ -26,6 +26,7 @@ import android.content.Intent;
 public class MainActivity extends Activity {
 
 	FoodsDataSource datasource = new FoodsDataSource(this);
+	List<Food> getFood;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +71,16 @@ public class MainActivity extends Activity {
     	     }
     	     if (resultCode == RESULT_CANCELED) {    
     	         //Write your code if there's no result
+    	    	 String name_to_delete = data.getStringExtra("name");
+    	    	 
+    	    	 for(int i = 0; i < getFood.size(); i++)
+    	    	 {
+    	    		 if(getFood.get(i).getName() == name_to_delete)
+    	    		 {
+    	    			 datasource.deleteFood(getFood.get(i));
+    	    			 break;
+    	    		 }
+    	    	 }
     	     }
     	  }
     }    
@@ -118,7 +129,6 @@ public class MainActivity extends Activity {
     	
     	tl_mass.removeAllViews();
         datasource.open();
-        List<Food> getFood;
         getFood = datasource.getAllFood();
         for(int i = 0; i < getFood.size(); i++)
         {

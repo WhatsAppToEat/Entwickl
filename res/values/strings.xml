@@ -25,5 +25,6 @@
         <item>Liter</item>
         <item>MLiter</item>
     </string-array>
+        <string name="delete">Delete</string>
 
 </resources>

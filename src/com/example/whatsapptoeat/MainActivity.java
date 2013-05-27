@@ -70,17 +70,7 @@ public class MainActivity extends Activity {
     	    	 FillTableWithDatabaseValues();
     	     }
     	     if (resultCode == RESULT_CANCELED) {    
-    	         //Write your code if there's no result
-    	    	 String name_to_delete = data.getStringExtra("name");
-    	    	 
-    	    	 for(int i = 0; i < getFood.size(); i++)
-    	    	 {
-    	    		 if(getFood.get(i).getName() == name_to_delete)
-    	    		 {
-    	    			 datasource.deleteFood(getFood.get(i));
-    	    			 break;
-    	    		 }
-    	    	 }
+    	    	 DeleteFoodFromDatabase(data.getStringExtra("name").toString());
     	     }
     	  }
     }    
@@ -89,6 +79,12 @@ public class MainActivity extends Activity {
 	
     	TextView tv_name = new TextView(this);
     	tv_name.setText(name);
+    	tv_name.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Click_FoodInTable(v);
+			}
+		});
     	
     	TextView tv_menge = new TextView(this);
     	tv_menge.setText(menge);
@@ -128,6 +124,7 @@ public class MainActivity extends Activity {
     	TableLayout tl_mass = (TableLayout)findViewById(R.id.tableLayout3);
     	
     	tl_mass.removeAllViews();
+    	
         datasource.open();
         getFood = datasource.getAllFood();
         for(int i = 0; i < getFood.size(); i++)
@@ -135,5 +132,24 @@ public class MainActivity extends Activity {
         	AddNewFoodToTable(getFood.get(i).getName(), String.valueOf(getFood.get(i).getMenge()), getFood.get(i).getMasseinheit());
         }
     }
-    
+ 
+    public void DeleteFoodFromDatabase(String name_to_delete) {
+   	 for(int i = 0; i < getFood.size(); i++)
+   	 {
+   		 String temp = getFood.get(i).getName();
+   		 
+   		 if(temp.equals(name_to_delete))
+   		 {    	    			 
+   			 datasource.deleteFood(getFood.get(i));
+   			 break;
+   		 }
+   	 }
+   	 FillTableWithDatabaseValues();
+    }
+
+    public void Click_FoodInTable(View v) {
+    	Intent myIntent = new Intent(this, AddFood.class);
+    	startActivityForResult(myIntent, 1);
+    }
 }
+

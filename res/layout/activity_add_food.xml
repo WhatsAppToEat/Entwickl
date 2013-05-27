@@ -59,16 +59,6 @@
         android:text="@string/Masseinheit_DP"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView1"
-        android:layout_marginBottom="14dp"
-        android:onClick="Click_Save"
-        android:text="@string/Save" />
-
     <Spinner
         android:id="@+id/spinner1"
         android:layout_width="wrap_content"
@@ -79,6 +69,16 @@
         android:prompt="@string/masseinheit_waehlen" />
 
     <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView1"
+        android:layout_marginBottom="19dp"
+        android:onClick="Click_Save"
+        android:text="@string/Save" />
+
+    <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,5 +87,14 @@
         android:layout_alignRight="@+id/spinner1"
         android:onClick="Click_Exit"
         android:text="@string/Exit" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_centerHorizontal="true"
+        android:onClick="Click_Delete"
+        android:text="@string/delete" />
 
 </RelativeLayout>

@@ -52,7 +52,6 @@ public class AddFood extends Activity {
 	                dialog.cancel();
 	            }
 	        });
-
 			AlertDialog alert = builder.create();
 			alert.show();
 		}
@@ -70,6 +69,29 @@ public class AddFood extends Activity {
 	
 	public void Click_Exit(View v){
 		finish();
+	}
+	
+	public void Click_Delete(View v) {
+		EditText et_name = (EditText)findViewById(R.id.editText1);
+		if (et_name.getText().toString() == "" || et_name.getText().toString() == " ") {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setTitle("Fehler beim Löschen");
+			builder.setMessage("Kann Eintrag nicht löschen, da kein bekannter Name angegeben wurde");
+			builder.setNegativeButton("OK",new DialogInterface.OnClickListener() {
+	            public void onClick(DialogInterface dialog, int id) {
+	                dialog.cancel();
+	            }
+	        });
+			AlertDialog alert = builder.create();
+			alert.show();
+		}
+		else {
+			Intent returnIntent = new Intent();
+			returnIntent.putExtra("name", et_name.getText().toString());
+			setResult(RESULT_CANCELED, returnIntent);
+			finish();
+		}
+		
 	}
 
 }

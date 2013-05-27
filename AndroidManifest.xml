@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.whatsapptoeat.AddFood"
+            android:name="com.example.whatsapptoeat.NewFoodActivity"
             android:label="@string/title_activity_add_food" >
         </activity>
     </application>

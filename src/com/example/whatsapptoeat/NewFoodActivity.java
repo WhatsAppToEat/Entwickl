@@ -18,7 +18,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class AddFood extends Activity {
+public class NewFoodActivity extends Activity {
 
 	FoodsDataSource datasource;
 	
@@ -89,7 +89,7 @@ public class AddFood extends Activity {
 	
 	public void Click_Delete(View v) {
 		EditText et_name = (EditText)findViewById(R.id.editText1);
-		if (et_name.getText().toString() == "" || et_name.getText().toString() == " ") {
+		if (et_name.getText().toString().equals("")) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Fehler beim Löschen");
 			builder.setMessage("Kann Eintrag nicht löschen, da kein bekannter Name angegeben wurde");

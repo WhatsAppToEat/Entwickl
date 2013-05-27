@@ -26,7 +26,7 @@ import android.content.Intent;
 public class MainActivity extends Activity {
 
 	FoodsDataSource datasource = new FoodsDataSource(this);
-	List<Food> getFood;
+	List<Food> allFood;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
     }
     
     public void Click_Add(View v) { 	
-    	Intent myIntent = new Intent(this, AddFood.class);
+    	Intent myIntent = new Intent(this, NewFoodActivity.class);
     	startActivityForResult(myIntent, 1);
     }
     
@@ -82,23 +82,26 @@ public class MainActivity extends Activity {
 	
     	TextView tv_name = new TextView(this);
     	tv_name.setText(name);
-    	tv_name.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Click_FoodInTable(v);
-			}
-		});
+    	tv_name.setPadding(0, 3, 0, 3);
     	
     	TextView tv_menge = new TextView(this);
     	tv_menge.setText(menge);
+    	tv_menge.setPadding(0, 3, 0, 3);
     	
     	TextView tv_masseinheit = new TextView(this);
     	tv_masseinheit.setText(masseinheit);
+    	tv_masseinheit.setPadding(0, 3, 0, 3);
     	
     	////
     	
     	TableRow tr_name = new TableRow(this);
     	tr_name.addView(tv_name);
+    	tr_name.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Click_FoodInTable(v);
+			}
+		});
     	
     	TableRow tr_menge = new TableRow(this);
     	tr_menge.addView(tv_menge);
@@ -128,22 +131,27 @@ public class MainActivity extends Activity {
     	
     	tl_mass.removeAllViews();
     	
-        datasource.open();
-        getFood = datasource.getAllFood();
-        for(int i = 0; i < getFood.size(); i++)
+        FillListWithFoodFromDB();
+        for(int i = 0; i < allFood.size(); i++)
         {
-        	AddNewFoodToTable(getFood.get(i).getName(), String.valueOf(getFood.get(i).getMenge()), getFood.get(i).getMasseinheit());
+        	AddNewFoodToTable(allFood.get(i).getName(), String.valueOf(allFood.get(i).getMenge()), allFood.get(i).getMasseinheit());
         }
+    }
+    
+    public void FillListWithFoodFromDB() {
+    	datasource.open();
+        allFood = datasource.getAllFood();
     }
  
     public void DeleteFoodFromDatabase(String name_to_delete) {
-   	 for(int i = 0; i < getFood.size(); i++)
+     FillListWithFoodFromDB();
+   	 for(int i = 0; i < allFood.size(); i++)
    	 {
-   		 String temp = getFood.get(i).getName();
+   		 String temp = allFood.get(i).getName();
    		 
    		 if(temp.equals(name_to_delete))
    		 {    	    			 
-   			 datasource.deleteFood(getFood.get(i));
+   			 datasource.deleteFood(allFood.get(i));
    			 break;
    		 }
    	 }
@@ -151,21 +159,33 @@ public class MainActivity extends Activity {
     }
 
     public void Click_FoodInTable(View v) {
-    	Intent myIntent = new Intent(this, AddFood.class);
-    	String name = ((TextView)v).getText().toString();
-    	String menge = "";
-    	String masseinheit = "";
-    	for (int i = 0; i < getFood.size(); i++) {
-    		String temp = getFood.get(i).getName();
-    		if (temp.equals(name)) {
-    			menge = String.valueOf(getFood.get(i).getMenge());
-    			masseinheit = getFood.get(i).getMasseinheit().toString();
-    		}
-    	}
-    	myIntent.putExtra("name", name);
-    	myIntent.putExtra("menge", menge);
-    	myIntent.putExtra("masseinheit", masseinheit);	
+    	Intent myIntent = new Intent(this, NewFoodActivity.class);
+    	TextView tv = (TextView)((TableRow)v).getChildAt(0);
+    	String name = tv.getText().toString();
+    	Food food = GetFoodByName(name);
+    	myIntent.putExtra("name", food.getName());
+    	myIntent.putExtra("menge", String.valueOf(food.getMenge()));
+    	myIntent.putExtra("masseinheit", food.getMasseinheit());	
     	startActivityForResult(myIntent, 1);
     }
+
+    public Food GetFoodByName(String name) {
+    	Food food = new Food();
+    	FillListWithFoodFromDB();
+    	String menge = "";
+    	String masseinheit = "";
+    	for (int i = 0; i < allFood.size(); i++) {
+    		String temp = allFood.get(i).getName();
+    		if (temp.equals(name)) {
+    			menge = String.valueOf(allFood.get(i).getMenge());
+    			masseinheit = allFood.get(i).getMasseinheit().toString();
+    		}
+    	}
+    	food.setName(name);
+    	food.setMasseinheit(masseinheit);
+    	food.setMenge(Double.valueOf(menge));
+    	return food;
+    }
 }
+
 

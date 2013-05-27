@@ -105,10 +105,21 @@ public class MainActivity extends Activity {
     	
     	TableRow tr_menge = new TableRow(this);
     	tr_menge.addView(tv_menge);
+    	tr_menge.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Click_FoodInTable(v);
+			}
+		});
     	
     	TableRow tr_masseinheit = new TableRow(this);
     	tr_masseinheit.addView(tv_masseinheit);
-    	
+    	tr_masseinheit.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Click_FoodInTable(v);
+			}
+		});
     	////
     	
     	TableLayout tl_name = (TableLayout)findViewById(R.id.tableLayout1);
@@ -160,12 +171,39 @@ public class MainActivity extends Activity {
 
     public void Click_FoodInTable(View v) {
     	Intent myIntent = new Intent(this, NewFoodActivity.class);
-    	TextView tv = (TextView)((TableRow)v).getChildAt(0);
-    	String name = tv.getText().toString();
-    	Food food = GetFoodByName(name);
-    	myIntent.putExtra("name", food.getName());
-    	myIntent.putExtra("menge", String.valueOf(food.getMenge()));
-    	myIntent.putExtra("masseinheit", food.getMasseinheit());	
+    	TableRow tablerow = (TableRow)v;
+    	
+    	//Herausfinden welche Row angeklickt wurde
+    	TableLayout tl_name = (TableLayout)findViewById(R.id.tableLayout1);
+    	TableLayout tl_menge = (TableLayout)findViewById(R.id.tableLayout2);
+    	TableLayout tl_masseinheit = (TableLayout)findViewById(R.id.tableLayout3);
+
+    	int index_name = tl_name.indexOfChild(tablerow);
+    	int index_menge = tl_menge.indexOfChild(tablerow);
+    	int index_masseinheit = tl_masseinheit.indexOfChild(tablerow);
+    	int index = -1;
+    	
+    	if (index_name != -1) {
+    		index = index_name;
+    	}
+    	if (index_menge != -1) {
+    		index = index_menge;
+    	}
+    	if (index_masseinheit != -1) {
+    		index = index_masseinheit;
+    	}
+    	
+    	//Name, Menge und Masseinheit bestimmen
+    	TextView tv_name = (TextView)((TableRow)tl_name.getChildAt(index)).getChildAt(0);
+    	String name = tv_name.getText().toString();
+    	TextView tv_menge = (TextView)((TableRow)tl_menge.getChildAt(index)).getChildAt(0);
+    	String menge = tv_menge.getText().toString();
+    	TextView tv_masseinheit = (TextView)((TableRow)tl_masseinheit.getChildAt(index)).getChildAt(0);
+    	String masseinheit = tv_masseinheit.getText().toString();
+    	
+    	myIntent.putExtra("name", name);
+    	myIntent.putExtra("menge", menge);
+    	myIntent.putExtra("masseinheit", masseinheit);	
     	startActivityForResult(myIntent, 1);
     }
 

@@ -153,7 +153,18 @@ public class MainActivity extends Activity {
     public void Click_FoodInTable(View v) {
     	Intent myIntent = new Intent(this, AddFood.class);
     	String name = ((TextView)v).getText().toString();
+    	String menge = "";
+    	String masseinheit = "";
+    	for (int i = 0; i < getFood.size(); i++) {
+    		String temp = getFood.get(i).getName();
+    		if (temp.equals(name)) {
+    			menge = String.valueOf(getFood.get(i).getMenge());
+    			masseinheit = getFood.get(i).getMasseinheit().toString();
+    		}
+    	}
     	myIntent.putExtra("name", name);
+    	myIntent.putExtra("menge", menge);
+    	myIntent.putExtra("masseinheit", masseinheit);	
     	startActivityForResult(myIntent, 1);
     }
 }

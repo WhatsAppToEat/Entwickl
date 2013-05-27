@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableLayout;
@@ -27,8 +28,16 @@ public class AddFood extends Activity {
 		setContentView(R.layout.activity_add_food);
 		Intent myIntent = this.getIntent();
 		String name = myIntent.getStringExtra("name");
+		String menge = myIntent.getStringExtra("menge");
+		String masseinheit = myIntent.getStringExtra("masseinheit");
 		EditText et_name = (EditText)findViewById(R.id.editText1);
+		EditText et_menge = (EditText)findViewById(R.id.editText2);
+		Spinner sp_mass = (Spinner)findViewById(R.id.spinner1);
+		ArrayAdapter  myAdap = (ArrayAdapter )sp_mass.getAdapter();
+		int position = myAdap.getPosition(masseinheit);
 		et_name.setText(name);
+		et_menge.setText(menge);
+		sp_mass.setSelection(position);
 		
 	}
 

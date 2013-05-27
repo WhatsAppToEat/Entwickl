@@ -2,6 +2,8 @@ package com.example.whatsapptoeat;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -27,6 +29,7 @@ public class MainActivity extends Activity {
 
 	FoodsDataSource datasource = new FoodsDataSource(this);
 	List<Food> allFood;
+	boolean mergeFood = false;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +59,60 @@ public class MainActivity extends Activity {
 
     	  if (requestCode == 1) {
 
-    	     if(resultCode == 1){      
+    	     if(resultCode == 1){
     	         String name = data.getStringExtra("name");
     	         String menge = data.getStringExtra("menge");
     	         String masseinheit = data.getStringExtra("masseinheit");
+    	         
+    	         Food newFood = new Food();
+    	         newFood.setName(name);
+    	         newFood.setMasseinheit(masseinheit);
+    	         newFood.setMenge(Double.valueOf(menge));
+    	         
+ 				for (int i = 0; i < allFood.size(); i++ ){
+ 					if (allFood.get(i).getName().toString().equals(name)) {
+ 						boolean canMerge = true;
+ 						newFood = AddingSameFood(newFood);
+ 						if (newFood.getMenge() == 0) {
+ 							newFood.setMenge(Double.valueOf(menge));
+ 							canMerge = false;
+ 						}
+ 						else {
+ 							DeleteFoodFromDatabase(newFood.getName());
+ 						}
+ 						if (canMerge == true) {
+ 							AlertDialog.Builder builder = new AlertDialog.Builder(this);
+ 							builder.setTitle("Schon vorhanden");
+ 							builder.setMessage("Das Lebensmittel " + name + " ist schon vorhanden. Ihr neuer Eintrag wurde mit dem alten Eintrag verknüpft.");
+ 							builder.setNegativeButton("OK",new DialogInterface.OnClickListener() {
+ 								public void onClick(DialogInterface dialog, int id) {
+ 									dialog.cancel();
+ 								}
+ 							});
+ 							AlertDialog alert = builder.create();
+ 							alert.show();
+ 						}
+ 						else {
+ 							AlertDialog.Builder builder = new AlertDialog.Builder(this);
+ 							builder.setTitle("Schon vorhanden");
+ 							builder.setMessage("Das Lebensmittel " + name + " ist schon vorhanden. Leider konnte der alte Eintrag nicht mit dem neuen Eintrag verknüpft werde. Stellen Sie sicher, dass sie bei gleichen Lebensmittel auch die gleiche Mengenbasis angeben");
+ 							builder.setNegativeButton("OK",new DialogInterface.OnClickListener() {
+ 								public void onClick(DialogInterface dialog, int id) {
+ 									dialog.cancel();
+ 								}
+ 							});
+ 							AlertDialog alert = builder.create();
+ 							alert.show();
+ 							return;
+ 						}
+ 					}
+ 				}
+ 				
     	         AddNewFoodToTable(name, menge, masseinheit);
     	    	 String[] values = new String[4];
-    	    	 values[0] = data.getStringExtra("name");
-    	    	 values[1] = data.getStringExtra("menge");
-    	    	 values[2] = data.getStringExtra("masseinheit");
+    	    	 values[0] = newFood.getName();
+    	    	 values[1] = String.valueOf(newFood.getMenge());
+    	    	 values[2] = newFood.getMasseinheit();
     	    	 values[3] = "5.5.2013";   	    	 
     	    	 datasource.createFood(values);
     	    	 FillTableWithDatabaseValues();
@@ -222,6 +270,49 @@ public class MainActivity extends Activity {
     	food.setName(name);
     	food.setMasseinheit(masseinheit);
     	food.setMenge(Double.valueOf(menge));
+    	return food;
+    }
+
+    public Food AddingSameFood(Food newFood) {
+    	Food food = new Food();
+		food.setName(newFood.getName());
+		food.setMasseinheit(newFood.getMasseinheit());
+		food.setMenge(0);
+    	Food foodFromDB = GetFoodByName(newFood.getName());
+    	if (foodFromDB.getMasseinheit().equals(newFood.getMasseinheit())) {
+    		food.setMenge(newFood.getMenge() + foodFromDB.getMenge());
+    		return food;
+    	}
+    	else {
+    		if (foodFromDB.getMasseinheit().equals("Gramm") && newFood.getMasseinheit().equals("KGramm")) {
+    			Double menge1 = foodFromDB.getMenge() / 1000;
+    			Double menge2 = newFood.getMenge();
+    			Double newMenge = menge1 + menge2;
+    			food.setMenge(newMenge);
+    			food.setMasseinheit("KGramm");
+    		}
+    		if (foodFromDB.getMasseinheit().equals("KGramm") && newFood.getMasseinheit().equals("Gramm")) {
+    			Double menge1 = foodFromDB.getMenge();
+    			Double menge2 = newFood.getMenge() / 1000;
+    			Double newMenge = menge1 + menge2;
+    			food.setMenge(newMenge);
+    			food.setMasseinheit("KGramm");
+    		}
+    		if (foodFromDB.getMasseinheit().equals("Liter") && newFood.getMasseinheit().equals("mLiter")) {
+    			Double menge1 = foodFromDB.getMenge();
+    			Double menge2 = newFood.getMenge() / 1000;
+    			Double newMenge = menge1 + menge2;
+    			food.setMenge(newMenge);
+    			food.setMasseinheit("Liter");
+    		}
+    		if (foodFromDB.getMasseinheit().equals("mLiter") && newFood.getMasseinheit().equals("Liter")) {
+    			Double menge1 = foodFromDB.getMenge() / 1000;
+    			Double menge2 = newFood.getMenge();
+    			Double newMenge = menge1 + menge2;
+    			food.setMenge(newMenge);
+    			food.setMasseinheit("Liter");
+    		}
+    	}
     	return food;
     }
 }

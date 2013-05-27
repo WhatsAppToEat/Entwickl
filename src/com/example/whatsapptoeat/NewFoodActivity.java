@@ -1,5 +1,7 @@
 package com.example.whatsapptoeat;
 
+import java.util.List;
+
 import de.wate.android.sqlite.first.FoodsDataSource;
 import de.wate.android.sqlite.first.Food;
 import android.R.string;
@@ -109,5 +111,4 @@ public class NewFoodActivity extends Activity {
 		}
 		
 	}
-
 }

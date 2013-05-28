@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
  						else {
  							AlertDialog.Builder builder = new AlertDialog.Builder(this);
  							builder.setTitle("Schon vorhanden");
- 							builder.setMessage("Das Lebensmittel " + name + " ist schon vorhanden. Leider konnte der alte Eintrag nicht mit dem neuen Eintrag verknüpft werde. Stellen Sie sicher, dass sie bei gleichen Lebensmittel auch die gleiche Mengenbasis angeben");
+ 							builder.setMessage("Das Lebensmittel " + name + " ist schon vorhanden. Leider konnte der alte Eintrag nicht mit dem neuen Eintrag verknüpft werde. Stellen Sie sicher, dass sie bei gleichen Lebensmittel auch die gleiche Mengenbasis angeben. Ihr Eintrag wurde nicht gespeichert!");
  							builder.setNegativeButton("OK",new DialogInterface.OnClickListener() {
  								public void onClick(DialogInterface dialog, int id) {
  									dialog.cancel();

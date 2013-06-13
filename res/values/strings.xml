@@ -26,5 +26,6 @@
         <item>MLiter</item>
     </string-array>
         <string name="delete">Delete</string>
+        <string name="ablaufdatum">Ablaufdatum:</string>
 
 </resources>

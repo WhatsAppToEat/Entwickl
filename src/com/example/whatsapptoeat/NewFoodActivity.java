@@ -21,8 +21,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 public class NewFoodActivity extends Activity {
-
-	FoodsDataSource datasource;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

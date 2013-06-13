@@ -9,17 +9,6 @@
     tools:context=".NewFoodActivity" >
 
     <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/Name_DP"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,8 +26,6 @@
         android:layout_alignBottom="@+id/textView1"
         android:layout_toRightOf="@+id/textView3"
         android:ems="10" >
-
-        <requestFocus />
     </EditText>
 
     <EditText
@@ -58,15 +45,6 @@
         android:layout_marginTop="40dp"
         android:text="@string/Masseinheit_DP"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignTop="@+id/textView3"
-        android:entries="@array/masseinheiten"
-        android:prompt="@string/masseinheit_waehlen" />
 
     <Button
         android:id="@+id/button1"
@@ -98,5 +76,25 @@
         android:layout_centerHorizontal="true"
         android:onClick="Click_Delete"
         android:text="@string/delete" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_marginLeft="21dp"
+        android:entries="@array/masseinheiten"
+        android:prompt="@string/masseinheit_waehlen" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="28dp"
+        android:text="@string/Name_DP"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

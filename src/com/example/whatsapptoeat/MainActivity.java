@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.format.DateFormat;
+import android.text.method.DateTimeKeyListener;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TableLayout;
@@ -12,6 +14,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import de.wate.android.sqlite.first.FoodsDataSource;
 import de.wate.android.sqlite.first.Food;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.ArrayAdapter;
@@ -24,6 +28,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.app.Activity;
 import android.content.Intent;
+import java.util.Date;
 
 public class MainActivity extends Activity {
 
@@ -349,5 +354,61 @@ public class MainActivity extends Activity {
 			}
 		}
 		return food;
+	}
+
+	public void Click_CheckADatum(View v) {
+		FillListWithFoodFromDB();
+		String message = "";
+		for (int i = 0; i < allFood.size(); i++) {
+			if (!allFood.get(i).getAblaufdatum().equals("0")) {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+				Date date = new Date();
+				String today = dateFormat.format(date);
+				String year_today = today.split("/")[0];
+				String month_today = today.split("/")[1];
+				if (month_today.charAt(0) == '0') {
+					month_today = month_today.substring(1);
+				}
+				String day_today = today.split("/")[2];
+				if (day_today.charAt(0) == '0') {
+					day_today = day_today.substring(1);
+				}
+				String day_ablaufdatum = allFood.get(i).getAblaufdatum().split("\\.")[0];
+				if (day_ablaufdatum.charAt(0) == '0') {
+					day_ablaufdatum = day_ablaufdatum.substring(1);
+				}
+				String month_ablaufdatum = allFood.get(i).getAblaufdatum().split("\\.")[1];
+				if (month_ablaufdatum.charAt(0) == '0') {
+					month_ablaufdatum = month_ablaufdatum.substring(1);
+				}
+				String year_ablaufdatum = allFood.get(i).getAblaufdatum().split("\\.")[2];
+				
+				
+				if (year_today.equals(year_ablaufdatum)) {
+					if (month_today.equals(month_ablaufdatum)) {
+						int differenz = Integer.parseInt(day_ablaufdatum) -  Integer.parseInt(day_today);
+						message = message + "\n" + allFood.get(i).getName() + " (" + allFood.get(i).getMenge() + " " + allFood.get(i).getMasseinheit() + ")" + " in " + String.valueOf(differenz) + " Tagen" + " (am " + day_ablaufdatum + "." + month_ablaufdatum + ")";
+					}
+				}		
+			}
+		}
+		
+		if (message.equals("")) {
+			message = "Kein Lebensmittel läuft ab.";
+		}
+		
+		AlertDialog.Builder builder = new AlertDialog.Builder(
+				this);
+		builder.setTitle("Ablaufdatum");
+		builder.setMessage("Folgende Lebensmittel laufen diesen Monat ab:" + message);
+		builder.setNegativeButton("OK",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,
+							int id) {
+						dialog.cancel();
+					}
+				});
+		AlertDialog alert = builder.create();
+		alert.show();
 	}
 }

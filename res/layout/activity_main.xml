@@ -38,6 +38,7 @@
         android:layout_alignBaseline="@+id/Button01"
         android:layout_alignBottom="@+id/Button01"
         android:layout_centerHorizontal="true"
+        android:onClick="Click_CheckADatum"
         android:text="@string/ADatum"
         android:width="95dp" />
 

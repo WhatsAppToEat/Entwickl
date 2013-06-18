@@ -27,5 +27,6 @@
     </string-array>
         <string name="delete">Delete</string>
         <string name="ablaufdatum">Ablaufdatum:</string>
+        <string name="speichern">speichern?</string>
 
 </resources>
